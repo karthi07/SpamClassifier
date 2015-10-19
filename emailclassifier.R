@@ -44,13 +44,15 @@ names(spam.df) <- c('term','frequency')
 str(spam.df)
 spam.df$frequency <- as.numeric(spam.df$frequency)
 
+spam.occurence <- sapply(1:nrow(spam.matrix), function(i)
+  {length(which(spam.matrix[i,]>0))/ ncol(spam.matrix)})
+spam.density <- spam.df$frequency / sum(spam.df$frequency)
+
+spam.df <- transform(spam.df,density = spam.density, occurence = spam.occurence)
+
+head(spam.df[with(spam.df,order(-occurence)),])
 
 
-
-
-
-
-
-
+# read ham mails
 
 
